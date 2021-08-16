@@ -77,32 +77,32 @@ function App() {
   const Unixtime = () =>{
     setInterval(() => {
       setCurTime(new Date().getTime())
-    }, 3000)
+    }, 5000)
     return curTime;
   }
 
   return (
     <div className="App">
-      <Row style={{backgroundColor: 'pink'}} justify="center">
-            <Col span={9}>
+      <Row justify="center">
+            <Col style={{border: '3px solid #eee' }} span={9}>
                 <Card style={{ height: 100}}>
                   <p>Test App</p>
                 </Card>
               <Row style={{backgroundColor: 'pink'}}>
                 <Col span={12}>
                   <Card style={{ height: 180}}>
-                    <p>Start: {cmntStrt} </p>
-                    <p>End: {cmntEnd}</p>
-                    <p>Start Save:</p>
-                    <p>End Save:</p>
+                    <p style={{color: 'green'}}>Start: {cmntStrt} </p>
+                    <p style={{color: 'red'}}>End: {cmntEnd}</p>
+                    <p style={{color: 'green'}}>Start Save:</p>
+                    <p style={{color: 'red'}}>End Save:</p>
                   </Card>
                 </Col>
                 <Col span={12}>
                   <Card style={{ height: 180}}>
-                  <p>Start: {phtoStrt}</p>
-                    <p>End: {phtoEnd}</p>
-                    <p>Start Save:</p>
-                    <p>End Save:</p>
+                    <p style={{color: 'green'}}>Start: {phtoStrt}</p>
+                    <p style={{color: 'red'}}>End: {phtoEnd}</p>
+                    <p style={{color: 'green'}}>Start Save:</p>
+                    <p style={{color: 'red'}}>End Save:</p>
                   </Card>
                 </Col>
               </Row>
@@ -110,18 +110,18 @@ function App() {
               <Row style={{backgroundColor: 'pink'}}>
                 <Col span={12}>
                   <Card style={{ height: 180}}>
-                  <p>Start: {todoStrt}</p>
-                    <p>End: {todoEnd}</p>
-                    <p>Start Save:</p>
-                    <p>End Save:</p>
+                  <p style={{color: 'green'}}>Start: {todoStrt}</p>
+                    <p style={{color: 'red'}}>End: {todoEnd}</p>
+                    <p style={{color: 'green'}}>Start Save:</p>
+                    <p style={{color: 'red'}}>End Save:</p>
                   </Card>
                 </Col>
                 <Col span={12}>
                   <Card style={{ height: 180}}>
-                    <p>Start: {postStrt}</p>
-                    <p>End: {postEnd}</p>
-                    <p>Start Save:</p>
-                    <p>End Save:</p>
+                    <p style={{color: 'green'}}>Start: {postStrt}</p>
+                    <p style={{color: 'red'}}>End: {postEnd}</p>
+                    <p style={{color: 'green'}}>Start Save:</p>
+                    <p style={{color: 'red'}}>End Save:</p>
                   </Card>
                 </Col>
               </Row>
@@ -153,7 +153,7 @@ function App() {
               <Row>
                 <Col span={24}>
                   <Card style={{ height: 100}}>
-                    <p>{Unixtime()}</p>
+                    <p style={{color: 'blue'}}>{Unixtime()}</p>
                   </Card>
                 </Col>
               </Row>
