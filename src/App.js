@@ -41,20 +41,20 @@ function App() {
 
   useEffect(() => {
     setTimeout(async () => {
-       fetchComments();
-       fetchPhotos();
-       fetchTodos();
-       fetchPosts();
+      await fetchComments();
+      await fetchPhotos();
+      await fetchTodos();
+      await fetchPosts();
       await runIndexDb();
     }, 5000);
   }, []);
 
   const runIndexDb = async () => {
     await indexedDb.createObjectStore(["comments", "photos", "todos", "posts"]);
-    savefetchComments();
-    savefetchPhotos();
-    savefetchTodos();
-    savefetchPosts();
+    await savefetchComments();
+    await savefetchPhotos();
+    await savefetchTodos();
+    await savefetchPosts();
   };
 
   //Saving Fetched-data in IndexedDB function
@@ -93,32 +93,36 @@ function App() {
   //API Fetch functions
   const fetchComments = async () => {
     const strttime = new Date().getTime();
-    await fetch("https://jsonplaceholder.typicode.com/comments");
+    const response = await fetch("https://jsonplaceholder.typicode.com/comments");
     const endtime = new Date().getTime();
+    cmntdata = await response.json();
     setCmntStrt(strttime);
     setCmntEnd(endtime);
   };
 
   const fetchPhotos = async () => {
     const strttime = new Date().getTime();
-    await fetch("https://jsonplaceholder.typicode.com/photos");
+    const response = await fetch("https://jsonplaceholder.typicode.com/photos");
     const endtime = new Date().getTime();
+    photodata = await response.json();
     setPhtoStrt(strttime);
     setPhtoEnd(endtime);
   };
 
   const fetchTodos = async () => {
     const strttime = new Date().getTime();
-    await fetch("https://jsonplaceholder.typicode.com/todos");
+    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
     const endtime = new Date().getTime();
+    tododata = await response.json();
     setTodoStrt(strttime);
     setTodoEnd(endtime);
   };
 
   const fetchPosts = async () => {
     const strttime = new Date().getTime();
-    await fetch("https://jsonplaceholder.typicode.com/posts");
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
     const endtime = new Date().getTime();
+    postdata = await response.json();
     setPostStrt(strttime);
     setPostEnd(endtime);
   };
