@@ -1,7 +1,7 @@
 import "./App.css";
 import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
-import IndexedDb from "./indexedDb";
+import IndexedDb from "./Database/indexedDb";
 import { Row, Col } from "antd";
 import { Card, Button } from "antd";
 
