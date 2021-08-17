@@ -1,9 +1,9 @@
-import "./App.css";
-import "antd/dist/antd.css";
 import React, { useState, useEffect } from "react";
 import IndexedDb from "./Database/indexedDb";
-import { Row, Col } from "antd";
 import { Card, Button } from "antd";
+import { Row, Col } from "antd";
+import "antd/dist/antd.css";
+import "./App.css";
 
 const indexedDb = new IndexedDb("SamagraX");
 
@@ -40,12 +40,12 @@ function App() {
   const [savepostEnd, setsavePostEnd] = useState();
 
   useEffect(() => {
-    setTimeout(() => {
-      fetchComments();
-      fetchPhotos();
-      fetchTodos();
-      fetchPosts();
-      runIndexDb();
+    setTimeout(async () => {
+       fetchComments();
+       fetchPhotos();
+       fetchTodos();
+       fetchPosts();
+      await runIndexDb();
     }, 5000);
   }, []);
 
@@ -57,11 +57,11 @@ function App() {
     savefetchPosts();
   };
 
+  //Saving Fetched-data in IndexedDB function
   const savefetchComments = () => {
     const savestrttime = new Date().getTime();
     indexedDb.putBulkValue("comments", cmntdata);
     const saveendtime = new Date().getTime();
-
     setsaveCmntStrt(savestrttime);
     setsaveCmntEnd(saveendtime);
   };
@@ -70,7 +70,6 @@ function App() {
     const savestrttime = new Date().getTime();
     indexedDb.putBulkValue("photos", photodata);
     const saveendtime = new Date().getTime();
-
     setsavePhtoStrt(savestrttime);
     setsavePhtoEnd(saveendtime);
   };
@@ -79,7 +78,6 @@ function App() {
     const savestrttime = new Date().getTime();
     indexedDb.putBulkValue("todos", tododata);
     const saveendtime = new Date().getTime();
-
     setsaveTodoStrt(savestrttime);
     setsaveTodoEnd(saveendtime);
   };
@@ -88,50 +86,44 @@ function App() {
     const savestrttime = new Date().getTime();
     indexedDb.putBulkValue("posts", postdata);
     const saveendtime = new Date().getTime();
-
     setsavePostStrt(savestrttime);
     setsavePostEnd(saveendtime);
   };
 
+  //API Fetch functions
   const fetchComments = async () => {
     const strttime = new Date().getTime();
-    const response = await fetch(
-      "https://jsonplaceholder.typicode.com/comments"
-    );
+    await fetch("https://jsonplaceholder.typicode.com/comments");
     const endtime = new Date().getTime();
-
     setCmntStrt(strttime);
     setCmntEnd(endtime);
-    cmntdata = await response.json();
   };
+
   const fetchPhotos = async () => {
     const strttime = new Date().getTime();
-    const response = await fetch("https://jsonplaceholder.typicode.com/photos");
+    await fetch("https://jsonplaceholder.typicode.com/photos");
     const endtime = new Date().getTime();
-
-    photodata = await response.json();
     setPhtoStrt(strttime);
     setPhtoEnd(endtime);
   };
+
   const fetchTodos = async () => {
     const strttime = new Date().getTime();
-    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+    await fetch("https://jsonplaceholder.typicode.com/todos");
     const endtime = new Date().getTime();
-
-    tododata = await response.json();
     setTodoStrt(strttime);
     setTodoEnd(endtime);
   };
+
   const fetchPosts = async () => {
     const strttime = new Date().getTime();
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    await fetch("https://jsonplaceholder.typicode.com/posts");
     const endtime = new Date().getTime();
-
-    postdata = await response.json();
     setPostStrt(strttime);
     setPostEnd(endtime);
   };
 
+  //Current timestamp function
   const Unixtime = () => {
     setInterval(() => {
       setCurTime(new Date().getTime());
@@ -139,19 +131,20 @@ function App() {
     return curTime;
   };
 
-  const button1 = async() => {
+  //Button Onclick functions
+  const comments = async() => {
     await fetchComments();
     await savefetchComments();
   };
-  const button2 = async() => {
+  const photos = async() => {
     await fetchPhotos();
     await savefetchPhotos();
   };
-  const button3 = async() => {
+  const todos = async() => {
     await fetchTodos();
     await savefetchTodos();
   };
-  const button4 = async() => {
+  const posts = async() => {
     await fetchPosts();
     await savefetchPosts();
   };
@@ -161,9 +154,9 @@ function App() {
       <Row justify="center">
         <Col style={{ border: "3px solid #eee" }} span={9}>
           <Card style={{ height: 100 }}>
-            <p>Test App</p>
+            <h1>SamagraX App</h1>
           </Card>
-          <Row style={{ backgroundColor: "pink" }}>
+          <Row>
             <Col span={12}>
               <Card style={{ height: 180 }}>
                 <p style={{ color: "green" }}>Start: {cmntStrt} </p>
@@ -181,8 +174,7 @@ function App() {
               </Card>
             </Col>
           </Row>
-
-          <Row style={{ backgroundColor: "pink" }}>
+          <Row>
             <Col span={12}>
               <Card style={{ height: 180 }}>
                 <p style={{ color: "green" }}>Start: {todoStrt}</p>
@@ -200,43 +192,37 @@ function App() {
               </Card>
             </Col>
           </Row>
-
           <br />
-
           <Row>
             <Col span={12}>
-              <Button type="primary" onClick={button1}>
+              <Button type="primary" onClick={comments}>
                 Button 1
               </Button>
             </Col>
             <Col span={12}>
-              <Button type="primary" onClick={button2}>
+              <Button type="primary" onClick={photos}>
                 Button 2
               </Button>
             </Col>
           </Row>
-
           <br />
-
           <Row>
             <Col span={12}>
-              <Button type="primary" onClick={button3}>
+              <Button type="primary" onClick={todos}>
                 Button 3
               </Button>
             </Col>
             <Col span={12}>
-              <Button type="primary" onClick={button4}>
+              <Button type="primary" onClick={posts}>
                 Button 4
               </Button>
             </Col>
           </Row>
-
           <br />
-
           <Row>
             <Col span={24}>
               <Card style={{ height: 100 }}>
-                <p style={{ color: "blue" }}>{Unixtime()}</p>
+                <p style={{ color: "blue" }}><b>{Unixtime()}</b></p>
               </Card>
             </Col>
           </Row>
