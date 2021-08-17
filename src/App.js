@@ -145,19 +145,15 @@ function App() {
 
   const button1 = () =>{
     fetchComments();
-    savefetchComments();
   }
   const button2 = () =>{
     fetchPhotos();
-    savefetchPhotos();
   }
   const button3 = () =>{
     fetchTodos();
-    savefetchTodos();
   }
   const button4 = () =>{
     fetchPosts();
-    savefetchPosts();
   }
 
   return (
