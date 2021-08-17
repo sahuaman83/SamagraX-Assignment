@@ -24,7 +24,7 @@ class IndexedDb {
             return false;
         }
     }
-    
+
     public async putBulkValue(tableName: string, values: object[]) {
         const tx = this.db.transaction(tableName, 'readwrite');
         const store = tx.objectStore(tableName);
