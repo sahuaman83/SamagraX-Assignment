@@ -40,53 +40,53 @@ function App() {
   const [savepostEnd, setsavePostEnd] = useState();
 
   useEffect(() => {
-    setTimeout(async () => {
-      await fetchComments();
-      await fetchPhotos();
-      await fetchTodos();
-      await fetchPosts();
-      await runIndexDb();
+    setTimeout(() => {
+      fetchComments();
+      fetchPhotos();
+      fetchTodos();
+      fetchPosts();
+      runIndexDb();
     }, 5000);
   }, []);
 
   const runIndexDb = async () => {
     await indexedDb.createObjectStore(["comments", "photos", "todos", "posts"]);
-    await savefetchComments();
-    await savefetchPhotos();
-    await savefetchTodos();
-    await savefetchPosts();
+    savefetchComments();
+    savefetchPhotos();
+    savefetchTodos();
+    savefetchPosts();
   };
 
-  const savefetchComments = async () => {
+  const savefetchComments = () => {
     const savestrttime = new Date().getTime();
-    await indexedDb.putBulkValue("comments", cmntdata);
+    indexedDb.putBulkValue("comments", cmntdata);
     const saveendtime = new Date().getTime();
 
     setsaveCmntStrt(savestrttime);
     setsaveCmntEnd(saveendtime);
   };
 
-  const savefetchPhotos = async () => {
+  const savefetchPhotos = () => {
     const savestrttime = new Date().getTime();
-    await indexedDb.putBulkValue("photos", photodata);
+    indexedDb.putBulkValue("photos", photodata);
     const saveendtime = new Date().getTime();
 
     setsavePhtoStrt(savestrttime);
     setsavePhtoEnd(saveendtime);
   };
 
-  const savefetchTodos = async () => {
+  const savefetchTodos = () => {
     const savestrttime = new Date().getTime();
-    await indexedDb.putBulkValue("todos", tododata);
+    indexedDb.putBulkValue("todos", tododata);
     const saveendtime = new Date().getTime();
 
     setsaveTodoStrt(savestrttime);
     setsaveTodoEnd(saveendtime);
   };
 
-  const savefetchPosts = async () => {
+  const savefetchPosts = () => {
     const savestrttime = new Date().getTime();
-    await indexedDb.putBulkValue("posts", postdata);
+    indexedDb.putBulkValue("posts", postdata);
     const saveendtime = new Date().getTime();
 
     setsavePostStrt(savestrttime);
@@ -139,17 +139,21 @@ function App() {
     return curTime;
   };
 
-  const button1 = () => {
-    fetchComments();
+  const button1 = async() => {
+    await fetchComments();
+    await savefetchComments();
   };
-  const button2 = () => {
-    fetchPhotos();
+  const button2 = async() => {
+    await fetchPhotos();
+    await savefetchPhotos();
   };
-  const button3 = () => {
-    fetchTodos();
+  const button3 = async() => {
+    await fetchTodos();
+    await savefetchTodos();
   };
-  const button4 = () => {
-    fetchPosts();
+  const button4 = async() => {
+    await fetchPosts();
+    await savefetchPosts();
   };
 
   return (
