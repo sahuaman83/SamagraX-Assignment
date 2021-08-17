@@ -103,7 +103,6 @@ function App() {
     setCmntStrt(strttime);
     setCmntEnd(endtime);
     cmntdata = await response.json();
-    console.log(cmntdata);
   }
   const fetchPhotos = async () =>{
     const strttime = new Date().getTime()
@@ -113,7 +112,6 @@ function App() {
     photodata = await response.json();
     setPhtoStrt(strttime);
     setPhtoEnd(endtime);
-    console.log(photodata);
   }
   const fetchTodos = async () =>{
     const strttime = new Date().getTime()
@@ -123,7 +121,6 @@ function App() {
     tododata = await response.json();
     setTodoStrt(strttime);
     setTodoEnd(endtime);
-    console.log(tododata);
   }
   const fetchPosts = async () =>{
     const strttime = new Date().getTime()
@@ -133,7 +130,6 @@ function App() {
     postdata = await response.json();
     setPostStrt(strttime);
     setPostEnd(endtime);
-    console.log(postdata);
   }
 
   const Unixtime = () =>{
