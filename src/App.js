@@ -29,7 +29,7 @@ function App() {
       fetchTodos();
       fetchPosts();
       
-    }, 1000)
+    }, 5000)
 
   },[])
 
@@ -76,8 +76,8 @@ function App() {
 
   const Unixtime = () =>{
     setInterval(() => {
-      setCurTime(new Date().getTime())
-    }, 5000)
+       setCurTime(new Date().getTime())
+    },1000)
     return curTime;
   }
 
