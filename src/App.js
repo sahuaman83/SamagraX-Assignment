@@ -41,10 +41,10 @@ function App() {
 
   useEffect(() => {
     setTimeout(async () => {
-      await fetchComments();
-      await fetchPhotos();
-      await fetchTodos();
-      await fetchPosts();
+      fetchComments();
+      fetchPhotos();
+      fetchTodos();
+      fetchPosts();
       await runIndexDb();
     }, 5000);
   }, []);
